@@ -1,0 +1,788 @@
+<!doctype html>
+<html class="no-js" lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Rancher Day 2020 [11.12.Thu] - Rancherで始めようKubernetes</title>
+    <meta name="description" content="Rancher社の最新技術やプロダクト動向、国内外での活用事例、トレーニングに触れながらRancherづくしの一日をぜひお楽しみください。">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="Rancher Day 2019.07.24.Wed - Rancherで始めようKubernetes" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.rancher.co.jp/rdt2019/" />
+    <meta property="og:image" content="https://www.rancher.co.jp/rdt2019/images/rancherday_ogp_img.png" />
+    <meta property="og:site_name" content="Rancher Day - Rancherで始めようKubernetes" />
+    <meta property="og:description" content="Rancher社の最新技術やプロダクト動向、国内外での活用事例、トレーニングに触れながらRancherづくしの一日をぜひお楽しみください。" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/shards.min.css">
+    <link rel="stylesheet" href="css/shards-demo.min.css">
+    <link rel="icon" href="https://www.rancher.co.jp/wp-content/uploads/2016/12/cropped-cropped-Rancher-logo-32x32.jpg" sizes="32x32" />
+    <link rel="icon" href="https://www.rancher.co.jp/wp-content/uploads/2016/12/cropped-cropped-Rancher-logo-192x192.jpg" sizes="192x192" />
+    <style>
+        .mediasp img {
+            max-width: 125px;
+        }
+        
+        .page-content .color {
+            padding: 25px 20px 0 20px;
+        }
+        
+        @keyframes gradient-color-a {
+            0% {
+                filter: hue-rotate(0deg);
+            }
+            40% {
+                filter: hue-rotate(30deg);
+            }
+            50% {
+                filter: hue-rotate(240deg);
+            }
+            60% {
+                filter: hue-rotate(330deg);
+            }
+            100% {
+                filter: hue-rotate(360deg);
+            }
+        }
+        
+        .welcome:before {
+            animation: gradient-color-a 10s infinite;
+            animation-timing-function: ease-in-out;
+        }
+        
+        .welcome:after {
+            animation: gradient-color-a 8s infinite;
+            animation-timing-function: ease-in-out;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="loader">
+        <div class="page-loader"></div>
+    </div>
+
+
+    <!-- Welcome Section -->
+    <div class="welcome d-flex justify-content-center flex-column">
+        <div class="inner-wrapper mt-auto mb-auto">
+            <h1 class="slide-in" style="margin-top: 20vh;">Rancher Day</h1>
+            <p class="slide-in" style="font-size:1.5em;">Rancherで始めようKubernetes　#rdt2019</p>
+            <p class="slide-in date" style="font-size:3em;">2019.07.24.Wed</p>
+            <div class="action-links slide-in">
+                <p class="badge mr12 badge-squared badge-outline-primary" style="font-size:1em;"><a href="https://shibuya.infield95.com/" target="_blank">渋谷ソラスタコンファレンス<span style="font-size: 1em">（SHIBUYA SOLASTA内）</span></a></p>
+                <div>
+                    <a href="#Speakers" data-scroll-to="#introduction" class="btn btn-outline-light btn-pill align-self-center">スピーカー</a>
+                    <a href="#Details" data-scroll-to="#introduction" class="btn btn-outline-light btn-pill align-self-center">タイムテーブル</a>
+                    <a href="#rta" class="btn btn-primary btn-pill align-self-center mr-2">チケットお申込み</a>
+                </div>
+            </div>
+        </div>
+        <div class="product-by" style="margin-top:1em;">
+            <p>Produced By</p>
+            <div class="text-center pt-2">
+                <a target="_blank" href="https://www.rancher.co.jp/"><img src="images/rancher-labs-horiz-color.png" alt="Rancher Labs" style="max-width: 240px;"></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <div class="page-content">
+        <!-- Content -->
+        <div class="content clearfix">
+
+            <div id="information" class="container mb-5">
+                <div class="section-title col-lg-8 col-md-10 ml-auto mr-auto small badge-outline-info m-3 p-3">
+                    【お知らせ : 7/22】セッション・アフターパーティーの時間が変更になっております。最新のタイムテーブルをご確認の上ご来場ください。
+                </div>
+                <div class="section-title col-lg-8 col-md-10 ml-auto mr-auto small badge-outline-info m-3 p-3">
+                    【お知らせ : 7/11】本イベント(Rancher Day 2019)は各社スポンサー様のご好意により、参加費は完全無料となりました。既にチケットをご購入頂いている方には、順次ご返金手続きのメールをお送り致します。
+                </div>
+            </div>
+
+            <div id="introduction" class="container mb-5">
+                <div class="section-title col-lg-8 col-md-10 ml-auto mr-auto">
+                    <h3>イベント概要</h3>
+                    <p class="lead">欧米、中国で爆発的な普及を見せているRancher。この世界市場で認められたオープンソース最新技術は日本のITをより便利にする可能性を持つものです。<br>本イベントでRancher社の最新技術やプロダクト動向、国内外での活用事例、トレーニングに触れながらRancherづくしの一日をぜひお楽しみください。
+                    </p>
+                </div>
+            </div>
+
+            <!-- about rancher k8s -->
+            <div class="container mb-5">
+                <div class="section-title col-lg-8 col-md-10 ml-auto mr-auto">
+                    <h4 class="mb-4">Rancherとは</h4>
+                    <p>クラウド/オンプレミス問わず、洗練されたUIでKubernetesクラスタの構築及び運用を一元管理できるコンテナ管理プラットフォームです。アメリカ合衆国カリフォルニア州のクパチーノに本社を持つRancher Labsが開発しています。オープンソース・ソフトウェアであるため、ソースコードはすべてGitHubで無償で公開されています。
+                    </p>
+                </div>
+            </div>
+            <div class="container mb-5">
+                <div class="section-title col-lg-8 col-md-10 ml-auto mr-auto">
+                    <h4 class="mb-4">Kubernetesとは</h4>
+                    <p>Kubernetesは、コンテナアプリケーションを運用する上で必要となるデプロイ、オートスケーリング、冗長性、可用性、自動化等を提供するコンテナオーケストレーションプラットフォームです。コンテナをベースとしたアプリケーションシステムにおける変化に強いシステム基盤を実現します。</p>
+                </div>
+            </div>
+
+
+            <!-- Speakers -->
+            <div id="Speakers" class="container mb-5">
+
+                <div class="section-title col-lg-8 col-md-10 ml-auto mr-auto">
+                    <h3 class="mb-4">スピーカー</h3>
+                </div>
+
+                <div class="example col-md-10 ml-auto mr-auto">
+                    <div class="row">
+                        <div class="color-wrapper col-lg-6 col-md-6 col-sm-6 mb-5">
+                            <div class="color h-100">
+                                <div class="swatch" style="background-image: url(images/speakers/shannon.png);background-size:cover;"></div>
+                                <p class="badge badge-outline-info">基調講演</p>
+                                <span class="title"><b>Shannon Williams</b></span>
+                                <span class="small">Rancher Labs<br> Co-Founder, VP Sales</span>
+                                <div class="small profile">
+                                    <u class="btn small" data-toggle="collapse" data-target="#swilliams" style="margin: 1em; display: block">Profile</u>
+                                    <div id="swilliams" class="collapse text-left">
+                                        <p>
+                                            2014年、Cloud.com社を共同創業したSheng Liangと次世代コンテナ基盤市場を狙いRancher Labsを再び創業し営業・マーケティング担当VPに就任。今やRancherは過去累計100億ダウンロードを超え、DisneyやIntelなどの有名世界企業にも次々と導入されている。
+                                        </p>
+                                        <p>
+                                            <a href="https://twitter.com/smw355"><span class="badge mr-3 badge-secondary">Twitter</span></a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="session">
+                                    <h5 class="btn btn-light" data-toggle="collapse" data-target="#swilliams-session" style="margin: 1em; display: block; line-height: 1.5em; white-space:normal">
+                                        世界におけるKubernetesの「いま」と「未来」
+                                        <br><span class="small">- CNCFボードメンバーが語る将来展望 -</span><br>﹀
+                                    </h5>
+                                    <div id="swilliams-session" class="collapse text-left">
+                                        <p class="small">
+                                            2018年、Rancher Labsは自社のコンテナ管理OSSである「Rancher」で扱えるオーケストレーションフレームワークをKubenetesに一本化した「Rancher 2.0」を発表しました。この決定は自社開発し好評を得ていたフレームワークであるCattleや、Swarm、Mesosなどのユーザーなどを否定することになり当時社内外で否定的な反響がありました。しかしながら、いまや業界内でKubenetesのデファクト・スタンダード化を疑問視することはなくなり当時の判断が正しかったことが証明されてきました。このように、Rancher
+                                            Labsは常に業界で必要とされる技術選定の「目利き役」として、エンタープライズの現場で求められるニーズを満たすOSSの開発に日々励んでいます。
+                                            <br>そのKubenetesが世界でどのように導入されているかの「現在」と、様々な技術トレンドを取り入れてどう「未来」を描いていくかの展望をCNCFのボードメンバーとしてRancher自体の開発にも深く関わる創業者自らが語ります。
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="color-wrapper col-lg-6 col-md-6 col-sm-6 mb-5">
+                            <div class="color h-100">
+                                <div class="swatch" style="background-image: url(images/speakers/yuki_nisiwaki.png);background-size:cover;"></div>
+                                <p class="badge badge-outline-info">基調講演</p>
+                                <span class="title"><b>西脇 雄基</b></span>
+                                <span class="small">LINE Corporation<br>
+                                    Software Engineer</span>
+                                <div class="small profile">
+                                    <u class="btn small" data-toggle="collapse" data-target="#ynishiwaki" style="margin: 1em; display: block">Profile</u>
+                                    <div id="ynishiwaki" class="collapse text-left">
+                                        <p>
+                                            LINE株式会社にてOpenStackとKubernetes Clusterの開発/運営を担当しているPrivate Cloud Platform Teamのチームリーダー。
+                                            <br>大規模なクラスター（+1500ハイパーバイザー）の開発者およびオペレーターとして3年以上OpenStackに取り組んでいる。
+                                            <br>約1年前からはRancherでManaged Kubernetes Service（+1400 Nodes、+60 Clusters）の開発/運用も開始、現在はOpenStackとManaged Kubernetesの両方のプロジェクトを担当し、安定したプライベートクラウドプラットフォームを提供している。
+                                        </p>
+                                        <p>
+                                            <a href="https://twitter.com/ukinau"><span class="badge mr-3 badge-secondary">Twitter</span></a>
+                                            <a href="https://github.com/ukinau"><span class="badge mr-3 badge-secondary">GitHub</span></a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="session">
+                                    <h5 class="btn btn-light" data-toggle="collapse" data-target="#ynishiwaki-session" style="margin: 1em; display: block; line-height: 1.5em; white-space:normal">
+                                        Managed k8s using Rancher with over 1000 nodes scale<br>﹀
+                                    </h5>
+                                    <div id="ynishiwaki-session" class="collapse text-left">
+                                        <p class="small">
+                                            LINEではPrivate Cloudのサービスの１つとしてRancherを用いたManagedなKubernetesクラスタを提供しています。
+                                            <br> 提供開始から半年、すでに1400ノード、60クラスタ以上のKubernetesクラスタが我々のサービスで管理されています。本セッションでは、我々がどのようにRancherを利用しているのか、大規模環境ならではの課題をどのように解決してきたのかを中心に我々の活動を紹介します。
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+                        <div class="color-wrapper col-lg-4 col-md-6 col-sm-6 mb-5">
+                            <div class="color h-100">
+                                <div class="swatch" style="background-image: url(images/speakers/s_sasaki.jpg);background-size:cover;"></div>
+                                <p class="badge badge-outline-info">セッション</p>
+                                <span class="title"><b>佐々木 真也</b></span>
+                                <span class="small">AlpacaJapan株式会社<br>
+                                                Head of Infrastructure Engineering</span>
+                                <div class="small profile">
+                                    <u class="btn small" data-toggle="collapse" data-target="#ssasaki" style="margin: 1em; display: block">Profile</u>
+                                    <div id="ssasaki" class="collapse text-left">
+                                        <p>AlpacaJapan インフラエンジニア。エンプラ系インテグレータ、クラウドインテグレータを経て現職。</p>
+                                        <p>
+                                            <a href="https://twitter.com/taishin"><span class="badge mr-3 badge-secondary">Twitter</span></a>
+                                            <a href="https://github.com/taishin"><span class="badge mr-3 badge-secondary">GitHub</span></a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="session">
+                                    <h5 class="btn btn-light" data-toggle="collapse" data-target="#ssasaki-session" style="margin: 1em; display: block; line-height: 1.5em; white-space:normal">
+                                        AlpacaJapanの機械学習環境になぜRancherが必要なのか？<br>﹀
+                                    </h5>
+                                    <div id="ssasaki-session" class="collapse text-left">
+                                        <p class="small">
+                                            AlpacaJapanでは、機械学習をベースにした様々なタスクを実行するインフラが必要になっています。これらに対応するため、マネージドなKubernetesサービス、オンプレミス環境、その他のクラウドサービスとRancherを組み合わせ、コスト面、拡張性、使いやすさを考慮したシステムを構築しています。
+                                            <br>以前に比べると簡単にKubernetesを利用できる環境にある中で、弊社がRancherを採用した理由、機械学習エンジニアにどのように使ってもらっているかをご説明します。
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="color-wrapper col-lg-4 col-md-6 col-sm-6 mb-5">
+                            <div class="color h-100">
+                                <div class="swatch" style="background-image: url(images/speakers/paluru.jpeg);background-size:cover;"></div>
+                                <p class="badge badge-outline-info">セッション</p>
+                                <span class="title"><b>Murali Paluru</b></span>
+                                <span class="small">Rancher Labs<br>
+                                    Software Engineer</span>
+                                <div class="small profile">
+                                    <u class="btn small" data-toggle="collapse" data-target="#paluru" style="margin: 1em; display: block">Profile</u>
+                                    <div id="paluru" class="collapse text-left">
+                                        <p>Rancher Labs,Incのプリンシパルソフトウェアエンジニア。
+                                            <br>2000年代半ばにネットワーキングのキャリアをスタートさせ、現在はコンテナとKubernetesを含むソリューションを開発しています。
+                                            <br>主には、マルチクラスタフェデレーションの一部としてコンテナ間の安全な接続を可能にすること、ネットワークポリシーを実装すること、CNIプラグイン、ネットワークパフォーマンスと安定性を強化することに取組んできました。
+                                        </p>
+                                        <p>
+                                            <a href="https://twitter.com/leodotcloud"><span class="badge mr-3 badge-secondary">Twitter</span></a>
+                                            <a href="https://github.com/leodotcloud"><span class="badge mr-3 badge-secondary">GitHub</span></a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="session">
+                                    <h5 class="btn btn-light" data-toggle="collapse" data-target="#paluru-session" style="margin: 1em; display: block; line-height: 1.5em; white-space:normal">
+                                        Kubernetesによるクラウドネイティブのデータサイエンスプラットフォームの構築<br>﹀
+                                    </h5>
+                                    <div id="paluru-session" class="collapse text-left">
+                                        <p class="small">
+                                            成長中のデータサイエンティストのチームは、オンプレミスのデータセンターがボトルネックになり始めたとき、クラウド移行するためのシンプルで柔軟、スケーラブルで安全な方法を探していました。 Kubernetesは、増え続ける機能セットとともに、さまざまなプライベートクラウドおよびパブリッククラウド上でアプリケーションを実行することを可能にし、ほとんどの要件を満たしました。
+                                            <br> この講演では、データサイエンティストチームと協力する機会を得たMurali Paluruが、集められた要件、アーキテクチャ、そしてKubernetesの上に構築されたデータサイエンスプラットフォームの詳細について説明します。また、Kubernetesの複雑さを隠し、基盤となるインフラストラクチャを管理する代わりにデータの分析に集中できるようにするために、彼が開発したワンクリックソリューションをデモします。
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="color-wrapper col-lg-4 col-md-6 col-sm-6 mb-5">
+                            <div class="color h-100">
+                                <div class="swatch" style="background-image: url(images/speakers/m_terada.jpg);background-size:cover;"></div>
+                                <p class="badge badge-outline-info">セッション</p>
+                                <span class="title"><b>寺田 充毅</b></span>
+                                <span class="small">株式会社インターネットイニシアティブ<br>
+                                        IoTビジネス事業部<br>
+                                        プラットフォームサービス開発課長</span>
+                                <div class="small profile">
+                                    <u class="btn small" data-toggle="collapse" data-target="#mterada" style="margin: 1em; display: block">Profile</u>
+                                    <div id="mterada" class="collapse text-left">
+                                        <p>IIJでオブジェクトストレージの開発、運用に従事。最近ではIoT関連の検証もやっています。</p>
+                                    </div>
+                                </div>
+                                <div class="session">
+                                    <h5 class="btn btn-light" data-toggle="collapse" data-target="#mterada-session" style="margin: 1em; display: block; line-height: 1.5em; white-space:normal">
+                                        Rancher/k8sを利用した運用改善の取り組み<br>﹀
+                                    </h5>
+                                    <div id="mterada-session" class="collapse text-left">
+                                        <p class="small">
+                                            オブジェクトストレージチームではRancherを使った運用改善の取り組みを2017年より進めてきました。最近ではRancher 2.0のリリースに伴いKubernete対応を進めています。このセッションでは我々Kubernetes素人がオンプレミス基盤でKuberneteを構築し、既存アプリをマイグレーションした経験を共有します。
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="color-wrapper col-lg-4 col-md-6 col-sm-6 mb-5">
+                            <div class="color h-100">
+                                <div class="swatch" style="background-image: url(images/speakers/y_nagatomi.jpg);background-size:cover;"></div>
+                                <p class="badge badge-outline-info">セッション</p>
+                                <span class="title"><b>永富 安和</b></span>
+                                <span class="small">株式会社マイクロアド<br>
+                                            Infrastructure Engineering</span>
+                                <div class="small profile">
+                                    <u class="btn small" data-toggle="collapse" data-target="#ynagatomi" style="margin: 1em; display: block">Profile</u>
+                                    <div id="ynagatomi" class="collapse text-left">
+                                        <p>マイクロアドの Data/Ad Platform のインフラを支えるエンジニア</p>
+                                        <p>
+                                            <a href="https://twitter.com/yassan168"><span class="badge mr-3 badge-secondary">Twitter</span></a>
+                                            <a href="https://github.com/yassan"><span class="badge mr-3 badge-secondary">GitHub</span></a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="session">
+                                    <h5 class="btn btn-light" data-toggle="collapse" data-target="#ynagatomi-session" style="margin: 1em; display: block; line-height: 1.5em; white-space:normal">
+                                        オンプレ×Google Cloud PlatformなML基盤におけるRancherの活用<br>﹀
+                                    </h5>
+                                    <div id="ynagatomi-session" class="collapse text-left">
+                                        <p class="small">
+                                            マイクロアドが構築しているオンプレとGoogle Cloud Platform（GCP）を組み合わせたハイブリッドなML基盤のご紹介。
+                                            <br> オンプレメインの環境下で、機械学習の検証をすばやく行うために、GCPを活用した環境を構築しています。
+                                            <br> 本講演では、ML基盤としてオンプレ×GCPな環境下においてRancherを組み合わせ、どの様に取り組み、どう活用していくのかについてご紹介いたします。
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="color-wrapper col-lg-4 col-md-6 col-sm-6 mb-5">
+                            <div class="color h-100">
+                                <div class="swatch" style="background-image: url(images/speakers/cheng.jpg);background-size:cover;"></div>
+                                <p class="badge badge-outline-info">セッション</p>
+                                <span class="title"><b>程 建強</b></span>
+                                <span class="small">Rancher Labs<br>
+                                        Field Engineer</span>
+                                <div class="small profile">
+                                    <u class="btn small" data-toggle="collapse" data-target="#cheng" style="margin: 1em; display: block">Profile</u>
+                                    <div id="cheng" class="collapse text-left">
+                                        <p>アクセンチュアなどでDevOpsエンジニアを経て、2019年よりRancher Labsの日本市場を担当。様々なコミュニティ活動やセミナー、トレーニングでRancherの魅力を語っている。</p>
+                                    </div>
+                                </div>
+                                <div class="session">
+                                    <h5 class="btn btn-light" data-toggle="collapse" data-target="#cheng-session" style="margin: 1em; display: block; line-height: 1.5em; white-space:normal">
+                                        Rancherの全プロダクト解説<br>﹀
+                                    </h5>
+                                    <div id="cheng-session" class="collapse text-left">
+                                        <p class="small">
+                                            Rancherはコンテナ管理OSSだけでなく、Rancher OS,、k3s（k3OS)、LonghornやRioなども開発しています。
+                                            <br>これからのプロダクト群の概要と開発の現状についてRancher Labsのエンジニアがわかりやすく語ります。
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="color-wrapper col-lg-4 col-md-6 col-sm-6 mb-5">
+                            <div class="color h-100">
+                                <div class="swatch" style="background-image: url(images/speakers/y_ichikawa.jpg);background-size:cover;"></div>
+                                <p class="badge badge-outline-info">セッション</p>
+                                <span class="title"><b>市川 豊</b></span>
+                                <span class="small">株式会社エーピーコミュニケーションズ
+                                    <br>技術開発部 コンテナグループ
+                                </span>
+                                <div class="small profile">
+                                    <u class="btn small" data-toggle="collapse" data-target="#iyutaka2" style="margin: 1em; display: block">Profile</u>
+                                    <div id="iyutaka2" class="collapse text-left">
+                                        <p>Educational Solution Architect/Developer Advocate/Technical Evangelist</p>
+                                        <p>インフラエンジニア、フロントエンドエンジニアとして官公庁のインフラ基盤を中心としたサーバの設計構築、運用保守、Webシステム開発を担当。専門学校で非常勤講師としてOSS（Linux、Docker、k8s、Rancher等）を教えたり、アドボケート／エバンジェリストとして、RancherJPコミュニティを始めとするミートアップや勉強会で登壇、ハンズオン講師としても活動中。
+                                            <br>CKA(Certified Kubernetes Administrator)、Mirantis KCM100取得。
+                                        </p>
+                                        <p> Community: RancherJP（#rancherjp）、くじらや（#kujiraya）、Cloud Native Deep Dive（#deepcn）
+                                            <br> Book: 「<a href="https://www.amazon.co.jp/%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%83%BB%E3%83%99%E3%83%BC%E3%82%B9%E3%83%BB%E3%82%AA%E3%83%BC%E3%82%B1%E3%82%B9%E3%83%88%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3-Docker-Kubernetes%E3%81%A7%E4%BD%9C%E3%82%8B%E3%82%AF%E3%83%A9%E3%82%A6%E3%83%89%E6%99%82%E4%BB%A3%E3%81%AE%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E5%9F%BA%E7%9B%A4-%E6%A9%8B%E6%9C%AC-%E7%9B%B4%E5%93%89/dp/4798155373/ref=tmm_pap_swatch_0"
+                                                rel="nofollow" target="_blank">コンテナ・ベース・オーケストレーション</a>」共著
+                                            <br> Article：「<a href="https://thinkit.co.jp/series/8740" rel="nofollow" target="_blank">マルチクラウド時代の最強コンビ　RancherによるKubernetes活用ガイド</a>」（第一回～第三回）
+                                        </p>
+                                        <p>
+                                            <a href="https://twitter.com/cyberblack28"><span class="badge mr-3 badge-secondary">Twitter</span></a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="session">
+                                    <h5 class="btn btn-light" data-toggle="collapse" data-target="#iyutaka-session" style="margin: 1em; display: block; line-height: 1.5em; white-space:normal">
+                                        Rancher &amp; Kubernetes
+                                        <br><span class="small">- Multi-cloud to Multi Kubernetes &amp; CloudNative to KubernetesNative -</span><br>﹀
+                                    </h5>
+                                    <div id="iyutaka-session" class="collapse text-left">
+                                        <p class="small">
+                                            Kubernetesがコンテナオーケストレーションのデファクトとなり、CloudNativeにおけるLinux,OSというポジションになるとまでいわれています。CloudNativeからKubernetesNative。
+                                            <br>そして、これまでMulti-Cloudとして複数のクラウド（パブリック/プライベート）を連携したシステムからさらにKubernetesクラスタを連携するシステムへと変わりつつあります。
+                                            <br>Multi-CloudからMulti-Kubernetes。まさに、"Kubernetes Everywhere"な時代です。
+                                            <br>そして、この”Kubernetes Everywhere”に対して、Multi-Kubernetes、KubernetesNative環境の構築や運用管理をどうするかを考える必要があります。可能であれば、オンプレミスやクラウド問わず一元で管理できれば最高です。そして、それを実現できるプラットフォームの一つがRancherです。
+                                            <br>オンプレミス、マネージド（AKS,EKS,GKE）に対するkubernetesクラスタ構築、カタログによる一括デプロイ、Prometheus+Grafana機能の同梱を主軸にRancherを詳解し、Multi-CloudからMulti-Kubernetes,CloudNativeからKubernetesNative時代の道しるべの一つになるお話をしたいと思います。
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="color-wrapper col-lg-12 col-md-12 col-sm-12">
+                            <div class="color">
+                                <div class="row">
+                                    <div class="color-wrapper col-lg-4 col-md-6 col-sm-12 small">
+                                        <div class="swatch" style="background-image: url(images/speakers/y_ichikawa.jpg);background-size:cover;"></div>
+                                        <p class="badge badge-outline-info">トレーニング 1</p>
+                                        <span class="title"><b>市川 豊</b></span>
+                                        <p>エーピーコミュニケーションズ<br> 技術開発部 コンテナグループ</p>
+                                        <u class="btn small" data-toggle="collapse" data-target="#yichikawa" style="margin: 3em; display: block">Profile</u>
+                                        <div id="yichikawa" class="collapse text-left">
+                                            <p>Educational Solution Architect/Developer Advocate/Technical Evangelist</p>
+                                            <p>インフラエンジニア、フロントエンドエンジニアとして官公庁のインフラ基盤を中心としたサーバの設計構築、運用保守、Webシステム開発を担当。専門学校で非常勤講師としてOSS（Linux、Docker、k8s、Rancher等）を教えたり、アドボケート／エバンジェリストとして、RancherJPコミュニティを始めとするミートアップや勉強会で登壇、ハンズオン講師としても活動中。
+                                                <br>CKA(Certified Kubernetes Administrator)、Mirantis KCM100取得。
+                                            </p>
+                                            <p> Community: RancherJP（#rancherjp）、くじらや（#kujiraya）、Cloud Native Deep Dive（#deepcn）<br> Book: 「<a href="https://www.amazon.co.jp/%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%83%BB%E3%83%99%E3%83%BC%E3%82%B9%E3%83%BB%E3%82%AA%E3%83%BC%E3%82%B1%E3%82%B9%E3%83%88%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3-Docker-Kubernetes%E3%81%A7%E4%BD%9C%E3%82%8B%E3%82%AF%E3%83%A9%E3%82%A6%E3%83%89%E6%99%82%E4%BB%A3%E3%81%AE%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E5%9F%BA%E7%9B%A4-%E6%A9%8B%E6%9C%AC-%E7%9B%B4%E5%93%89/dp/4798155373/ref=tmm_pap_swatch_0"
+                                                    rel="nofollow" target="_blank">コンテナ・ベース・オーケストレーション</a>」共著<br> Article：「
+                                                <a href="https://thinkit.co.jp/series/8740" rel="nofollow" target="_blank">マルチクラウド時代の最強コンビ　RancherによるKubernetes活用ガイド</a>」（第一回～第三回）
+                                            </p>
+                                            <p>
+                                                <a href="https://twitter.com/cyberblack28"><span class="badge mr-3 badge-secondary">Twitter</span></a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="color-wrapper col-lg-8 col-md-6 col-sm-12 text-left small">
+                                        <h5>RancherによるKubernetes活用</h5>
+                                        <p>Multi-CloudからMluti-Kubernetes、CloudNativeからKubernetesNativeな時代におけるKubernetesクラスタの構築、アプリケーションデプロイ、モニタリングについてRancherをベースにハンズオン交えてお話します。</p>
+                                        <ul>
+                                            <li>13時00分より開場いたします。</li>
+                                            <li>ハンズオンで使用する端末はご用意ください。（Win, Mac可）</li>
+                                            <li>Google Cloud Platformの無料トライアル枠を利用しますので、<a href="https://console.cloud.google.com/freetrial" rel="nofollow" target="_blank">こちら</a>よりアカウント登録（クレジットカード登録含む）を完了して、ポータルにログインできる状態まで準備をお願いします。</li>
+                                            <li>電源・Wifiは会場にあります。</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="color-wrapper col-lg-12 col-md-12 col-sm-12">
+                            <div class="color">
+                                <div class="row">
+                                    <div class="color-wrapper col-lg-4 col-md-6 col-sm-12 small">
+                                        <div class="swatch" style="background-image: url(images/speakers/fujiwara.jpg);background-size:cover;"></div>
+                                        <p class="badge badge-outline-info">トレーニング 2</p>
+                                        <span class="title"><b>藤原 涼馬</b></span>
+                                        <p></p>
+                                        <u class="btn small" data-toggle="collapse" data-target="#rfujiwara" style="margin: 3em; display: block">Profile</u>
+                                            <div id="rfujiwara" class="collapse text-left">
+                                                <p>ユーザ系SIerにてR&Dとして経験後、転職して現職。
+												現在はフリーランスエンジニア(インフラ・セキュリティ領域)かつ、
+												大手出版&HR系企業グループにてインフラエンジニアとして活動中。
+												Japan Container Days v18.12セッションスピーカーおよび、
+												CloudNative Days Tokyoセッションスピーカーなど登壇多数。
+												著作・連載として先行事例に学ぶKubernetes企業活用の現実(@IT)、
+												コンテナベースのCI/CD本番事例大解剖(@IT)、
+												マルチクラウド時代の最強コンビ　RancherによるKubernetes活用ガイド(ThinkIT)ほか複数
+                                                </p>
+                                            </div>
+                                    </div>
+                                    <div class="color-wrapper col-lg-8 col-md-6 col-sm-12 text-left small">
+                                        <h5>Rancherで試して実感する開発プロセス</h5>
+                                        <p>本ハンズオンではRancherを中心に据えたを体験してみます。完了した暁には、CI/CDを使ったシステム実装の流れについて理解できているはずです。</p>
+                                        <ul>
+                                            <li>Rancher Pipelineを使ったCI体験</li>
+                                            <li>上記に則ったアプリケーション開発の進め方</li>
+                                            <li>Rancher Pipelineを使ったCD体験</li>
+                                        </ul>
+                                        <p>注意事項</p>
+                                        下記内容は準備必須です。
+                                        <ul>
+                                            <li>自身で自由に利用可能なGitLab.comアカウント<br> ※Githubではなく、GitLab.comである点にご注意ください
+                                            </li>
+                                        </ul>
+                                        下記のうち、いずれかの準備をお願いします。
+                                        <ol>
+                                            <li>Google Cloud Platformの無料トライアル枠</li>
+                                            <li>事前配布資料に基づいたRancher動作環境の構築（推奨）</li>
+                                        </ol>
+                                        <p>※ 2については最低2コアCPU,メモリ 4GB, ストレージ 50GB程度の割当は必要です。（変更可能性あり）
+                                            <br> ※ 1の場合も2と同等の事前作業が必要となります。</p>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <p class="small">※登壇者情報は随時アップデートされます。</p>
+                </div>
+
+            </div>
+
+            <!-- Details -->
+            <div id="Details" class="container mb-5">
+                <div class="section-title col-lg-8 col-md-10 ml-auto mr-auto">
+                    <h3 class="mb-4">タイムテーブル</h3>
+                    <p>※セッションの詳細な開始時間などは、イベント開催日まで随時アップデートされます。</p>
+                </div>
+
+                <div class="col-md-10 ml-auto mr-auto content" style="margin: 45px 0 60px 0;">
+                    <h6>セッション　４D<span class="small"> （17:50〜のみ4E）</span></h6>
+                    <table class="table table-striped table-responsive-md" style="display: table;">
+                        <thead class="w-100">
+                            <tr>
+                                <th>時間</th>
+                                <th>内容</th>
+                            </tr>
+                        </thead>
+                        <tbody class="w-100">
+                            <tr>
+                                <td>10:30</td>
+                                <td>開場</td>
+                            </tr>
+                            <tr>
+                                <td>11:00 - 11:30</td>
+                                <td>基調講演
+                                    <div class="border-left p-3 m-3"><b class="mb-2">Shannon Williams</b>　Rancher Labs
+                                        <br>【英語】世界におけるKubernetesの「いま」と「未来」
+                                        <br><span class="small">- CNCFボードメンバーが語る将来展望 -</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>11:30 - 12:00</td>
+                                <td>基調講演
+                                    <div class="border-left p-3 m-3"><b class="mb-2">西脇 雄基</b>　LINE Corporation
+                                        <br>Managed k8s using Rancher with over 1000 nodes scale
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>12:00 - 13:30</td>
+                                <td>昼食
+                                    <br><span class="small">※100名様分のお弁当をご用意しております。
+                                        <br>　入場時に引換券をお渡ししますが、先着順となりますのでお早めのお越しをおすすめします。</span></td>
+                            </tr>
+                            <tr>
+                                <td>13:30 - 14:10</td>
+                                <td>
+                                    <div class="border-left p-3 m-3"><b class="mb-2">Murali Paluru</b>　Rancher Labs
+                                        <br>【英語】Kubernetesによるクラウドネイティブのデータサイエンスプラットフォームの構築
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>14:20 - 14:50</td>
+                                <td>
+                                    <div class="border-left p-3 m-3"><b class="mb-2">永富 安和</b>　株式会社マイクロアド
+                                        <br>オンプレ×Google Cloud PlatformなML基盤におけるRancherの活用
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>15:10 - 15:40</td>
+                                <td>
+                                    <div class="border-left p-3 m-3"><b class="mb-2">程　建強</b>　Rancher Labs
+                                        <br>Rancherの全プロダクト解説
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>15:50 - 16:20</td>
+                                <td>
+                                    <div class="border-left p-3 m-3"><b class="mb-2">寺田　充毅</b>　株式会社インターネットイニシアティブ
+                                        <br>Rancher/k8sを利用した運用改善の取り組み
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>16:20 - 16:50</td>
+                                <td>
+                                    <div class="border-left p-3 m-3"><b class="mb-2">スピーカー全員集合！
+                                        <br>Q&A 大会</b>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>17:00 - 17:30</td>
+                                <td>
+                                    <div class="border-left p-3 m-3"><b class="mb-2">市川　豊</b>　株式会社エーピーコミュニケーションズ
+                                        <br>Rancher &amp; Kubernetes
+                                        <br><span class="small">- Multi-cloud to Multi Kubernetes &amp; CloudNative to KubernetesNative -</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>17:40 - 18:10</td>
+                                <td>
+                                    <div class="border-left p-3 m-3"><b class="mb-2">佐々木　真也</b>　AlpacaJapan株式会社
+                                        <br>AlpacaJapanの機械学習環境になぜRancherが必要なのか？
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>18:25 - 18:45</td>
+                                <td>
+                                    <div class="border-left p-3 m-3"><b class="mb-2">"RancherによるKubernetes活用完全ガイド"
+                                        <br>執筆者3人によるトークセッション</b>
+                                        <br>※アフターパーティー準備の為、このセッションのみ
+                                        <br>　４Eへのご移動をお願いいたします。
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>19:00 - 20:30</td>
+                                <td>RDT2019アフターパーティー
+                                    <br><span class="small">※軽食をご用意しています。</span>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="small">※プログラムは変更になる場合があります。<br>※【英語】・・・英語でのセッションになります</p>
+                </div>
+
+                <div class="col-md-10 ml-auto mr-auto content" style="margin: 45px 0 60px 0;">
+                    <h6>ハンズオン　４E</h6>
+                    <table class="table table-striped table-responsive-md" style="display: table;">
+                        <thead>
+                            <tr>
+                                <th>時間</th>
+                                <th>内容</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>13:30 - 15:00<span class="small">（90分）</span></td>
+                                <td>トレーニング1（ハンズオン）<br>
+
+                                    <b>市川 豊</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>15:20 - 16:50<span class="small">（90分）</span></td>
+                                <td>トレーニング2（ハンズオン）<br>
+
+                                    <b>藤原 涼馬</b>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Extras -->
+        <div id="extras" class="mb-5 py-5">
+            <div class="section-title container ml-auto mr-auto">
+                <div class="col-lg-8 col-md-10 ml-auto mr-auto mb-5">
+                    <h3 class="mb-4 text-center">アクセス</h3>
+                    <p class="text-center"><strong>渋谷ソラスタコンファレンス（SHIBUYA SOLASTA内）</strong><br> 〒150-0043 東京都渋谷区道玄坂１丁目２１−番1号 渋谷ソラスタ4階
+                    </p>
+                </div>
+            </div>
+            <div class="container-fluid" style="padding: 0">
+                <div class="gmap">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12967.352008862868!2d139.696404!3d35.6563627!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x5694364c963484b5!2z5riL6LC344K944Op44K544K_44Kz44Oz44OV44Kh44Os44Oz44K5KOa4i-iwty_osrjjgZfkvJrorbDlrqQp!5e0!3m2!1sja!2sjp!4v1560153241318!5m2!1sja!2sjp"
+                        width="100%" height="300" frameborder="0" style="border:0" allowfullscreen=""></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Documentation -->
+        <div id="documentation" class="bg-white">
+            <div class="section-title container ml-auto mr-auto py-5">
+                <div class="col-lg-8 col-md-10 ml-auto mr-auto py-5">
+                    <h1 class="mb-2 text-center"><img src="images/common/ticket_icn.svg" width="80" height="80"></h1>
+                    <h3 class="mb-4 text-center">Ticket</h3>
+                    <div class="example col-md-10 ml-auto mr-auto content">
+                        <table class="table table-striped table-responsive-md" style="font-size: 2em;display: table;">
+                            <thead>
+                                <tr>
+                                    <th>チケット種別</th>
+                                    <th>料金</th>
+                                </tr>
+                            </thead>
+                            <tbody class="w-100">
+                                <tr>
+                                    <td>セッション</td>
+                                    <td>¥0- </td>
+                                </tr>
+                                <tr>
+                                    <td>セッション＋トレーニング1</td>
+                                    <td>¥0- </td>
+                                </tr>
+                                <tr>
+                                    <td>セッション＋トレーニング2</td>
+                                    <td>¥0- </td>
+                                </tr>
+                                <tr>
+                                    <td>セッション＋トレーニング1＋トレーニング2</td>
+                                    <td>¥0- </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>※トレーニングのチケットはお申込みの先着順とさせていただきます。
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer CTA -->
+        <div id="rta" class="footer-cta bg-dark">
+            <div class="container my-5">
+                <div class="py-5">
+                    <div class="text-center">
+                        <h2 class="text-white">お申込みについて</h2>
+                        <p class="text-muted col-lg-8 col-md-10 ml-auto mr-auto">チケットのお申込みは EventRegist にて</p>
+                    </div>
+                    <div class="mb-5">
+                        <a href="https://eventregist.com/e/rdt2019" target="_blank"><button type="button" class="btn btn-primary btn-pill btn-lg d-table ml-auto mr-auto">
+                            お申込み
+                          </button></a>
+                    </div>
+                    <div class="share d-table d-sm-flex mx-auto justify-content-center mt-5">
+                        <a href="https://twitter.com/intent/tweet?url=https://www.rancher.co.jp/rdt2019/&text=Rancher+Day+20190724+%23rdt2019" class="btn btn-pill d-table d-sm-inline-block mx-auto mx-sm-2 btn-outline-primary mr-4 mb-3" title="Share Shards on Twitter">
+                            <i class="fa fa-twitter mr-1"></i> Share on Twitter</a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.rancher.co.jp/rdt2019/" class="btn btn-pill d-table d-sm-inline-block mx-auto mx-sm-2 btn-outline-primary mr-4 mb-3" title="Share on Facebook">
+                            <i class="fa fa-facebook mr-1"></i> Share on Facebook</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="main-footer py-5">
+            <p class="text-muted text-center small p-0 mb-4">&copy; Copyright 2019 — Rancher Day実行委員会</p>
+        </footer>
+        <div id="sponsors" class="bg-white">
+            <div class="section-title container ml-auto mr-auto py-5 row">
+                <div class="col-lg-6 col-md-10 ml-auto mr-auto py-5">
+                    <h3 class="mb-4 text-center small">メディアスポンサー</h3>
+                    <div class="text-center mediasp d-flex align-items-center">
+                        <a target="_blank" href="https://thinkit.co.jp/" class="mx-auto"><img src="images/spnsr_thinkit.png" alt="Thinkit"></a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-10 ml-auto mr-auto py-5">
+                    <h3 class="mb-4 text-center small">スポンサー</h3>
+                    <div class="row">
+                        <div class="d-flex align-items-center text-center mediasp w-50">
+                            <a target="_blank" href="https://www.mocha.jp/" class="mx-auto"><img src="images/spnsr_mocha.png" alt="mocha"></a>
+                        </div>
+                        <div class="d-flex align-items-center text-center mediasp w-50">
+                            <a target="_blank" href="https://www.ap-com.co.jp/" class="mx-auto"><img src="images/spnsr_apc.png" alt="株式会社エーピーコミュニケーションズ"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <div id="fb-root"></div>
+    <script>
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10&appId=1662270373824826";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="js/shards.min.js"></script>
+    <script src="js/demo.min.js"></script>
+
+</body>
+
+</html>
